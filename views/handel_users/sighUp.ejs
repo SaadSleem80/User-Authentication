@@ -1,0 +1,52 @@
+<%- include('../component/header.ejs') %>
+<div class="form_div">
+<div class="container register_form ">
+  <form method="POST">
+    <h2 class="mb-4">Sign Up</h2>
+    <div class="form-group">
+      <input type="email" name="email" placeholder="Email" />
+      <div class="email_err err"></div>
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" placeholder="Password" />
+      <div class="password_err err"></div>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="bt" value="Sigh up" />
+    </div>
+  </form>
+</div>
+</div>
+<script>
+  const form = document.querySelector("form");
+  const email_error = document.querySelector("form .email_err");
+  const password_error = document.querySelector("form .password_err");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    email_error.textContent = "";
+    password_error.textContent = "";
+
+    const email = form.email.value;
+    const password = form.password.value;
+
+    try {
+      const res = await fetch("/sighup", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.error) {
+        email_error.textContent = data.error.email;
+        password_error.textContent = data.error.password;
+      }
+      if (data.user) {
+        location.assign("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  });
+</script>
+<%- include('../component/footer.ejs') %>
