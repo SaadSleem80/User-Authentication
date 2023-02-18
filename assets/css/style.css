@@ -1,6 +1,7 @@
 *{ 
     box-sizing: border-box;
 }
+/* main color #AD0000 */
 .nav-link {
     color: #000;
 }
@@ -11,7 +12,7 @@
 .index { 
     height: calc(100vh - 56px);
 }
-.content .row .col-3 .card {
+.content .row .col-lg-3 .card {
     margin: 10px;
     padding: 10px;
 }
@@ -32,6 +33,9 @@ header {
 header .nav .logo a {
     text-decoration: none;
     color: white;
+}
+header .nav .logo a h2 {
+    margin: 0;
 }
 header .nav {
     display: flex;
@@ -134,4 +138,15 @@ header .nav .links ul li a {
 .register_form form .bt:hover {
     background-color:white ;
     color:#ed2c25;
+}
+@media (max-width:768px) {
+    .landing .text h1 { 
+        font-size: 40px;
+    }
+    .register_form form {
+        min-width: 300px;
+    }
+    header .nav {
+        margin: 0 5px;
+    }
 }
